@@ -1,5 +1,5 @@
 
-# StepView [![](https://jitpack.io/v/baoyachi/StepView.svg)](https://jitpack.io/#baoyachi/StepView)
+# StepView [![](https://jitpack.io/v/SherlockShi/StepView.svg)](https://jitpack.io/#SherlockShi/StepView)
 Step by step. Step indicator. Flow indicator。  
 
 
@@ -33,10 +33,10 @@ Add it in your root build.gradle at the end of repositories:
 Step 2. Add the dependency
 
 	dependencies {
-	        compile 'com.github.baoyachi:StepView:1.9'
+	        implementation 'com.github.SherlockShi:StepView:x.y'
 	}		
 
-
+x.y.z is [![](https://jitpack.io/v/SherlockShi/StepView.svg)](https://jitpack.io/#SherlockShi/StepView)
 
 ### use HorizontalStepView
 
@@ -70,8 +70,10 @@ HorizontalStepView setpview5 = (HorizontalStepView) mView.findViewById(R.id.step
         setpview5
                 .setStepViewTexts(stepsBeanList)//总步骤
                 .setTextSize(12)//set textSize
+                .isDoneTextBold(false)
                 .setStepsViewIndicatorCompletedLineColor(ContextCompat.getColor(getActivity(), android.R.color.white))//设置StepsViewIndicator完成线的颜色
                 .setStepsViewIndicatorUnCompletedLineColor(ContextCompat.getColor(getActivity(), R.color.uncompleted_text_color))//设置StepsViewIndicator未完成线的颜色
+                .setStepsViewIndicatorUnCompletedLineType(HorizontalStepsViewIndicator.UNCOMPLETED_LINE_TYPE_DASH)
                 .setStepViewComplectedTextColor(ContextCompat.getColor(getActivity(), android.R.color.white))//设置StepsView text完成线的颜色
                 .setStepViewUnComplectedTextColor(ContextCompat.getColor(getActivity(), R.color.uncompleted_text_color))//设置StepsView text未完成线的颜色
                 .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(getActivity(), R.drawable.complted))//设置StepsViewIndicator CompleteIcon

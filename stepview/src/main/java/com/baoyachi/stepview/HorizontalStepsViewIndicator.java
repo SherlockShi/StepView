@@ -205,25 +205,22 @@ public class HorizontalStepsViewIndicator extends View
             mUnCompletedPaint.setStyle(Paint.Style.STROKE);
         }
 
-        for(int i = 0; i < mCircleCenterPointPositionList.size() -1; i++)
-        {
+        for(int i = 0; i < mCircleCenterPointPositionList.size() -1; i++) {
             //前一个ComplectedXPosition
             final float preComplectedXPosition = mCircleCenterPointPositionList.get(i);
             //后一个ComplectedXPosition
             final float afterComplectedXPosition = mCircleCenterPointPositionList.get(i + 1);
 
-            if(i <= mComplectingPosition&&mStepBeanList.get(0).getState()!=StepBean.STEP_UNDO)//判断在完成之前的所有点
-            {
+            if(i <= mComplectingPosition && mStepBeanList.get(0).getState() != StepBean.STEP_UNDO && mStepBeanList.get(0).getState() != StepBean.STEP_CURRENT) {//判断在完成之前的所有点
                 //判断在完成之前的所有点，画完成的线，这里是矩形,很细的矩形，类似线，为了做区分，好看些
                 canvas.drawRect(preComplectedXPosition + mCircleRadius - 10, mLeftY, afterComplectedXPosition - mCircleRadius + 10, mRightY, mCompletedPaint);
-            } else
-            {
+            } else {
                 if (mUnCompletedLineType == UNCOMPLETED_LINE_TYPE_DASH) {
                     mPath.moveTo(preComplectedXPosition + mCircleRadius, mCenterY);
                     mPath.lineTo(afterComplectedXPosition - mCircleRadius, mCenterY);
                     canvas.drawPath(mPath, mUnCompletedPaint);
                 } else {
-                    //判断在完成之前的所有点，画完成的线，这里是矩形,很细的矩形，类似线，为了做区分，好看些
+                    //画未完成的线，这里是矩形,很细的矩形，类似线，为了做区分，好看些
                     canvas.drawRect(preComplectedXPosition + mCircleRadius - 10, mLeftY, afterComplectedXPosition - mCircleRadius + 10, mRightY, mUnCompletedPaint);
                 }
             }
@@ -246,7 +243,7 @@ public class HorizontalStepsViewIndicator extends View
             }else if(stepsBean.getState()==StepBean.STEP_CURRENT)
             {
                 mCompletedPaint.setColor(Color.WHITE);
-                canvas.drawCircle(currentComplectedXPosition, mCenterY, mCircleRadius * 1.1f, mCompletedPaint);
+                canvas.drawCircle(currentComplectedXPosition, mCenterY, mCircleRadius * 1.0f, mCompletedPaint);
                 mAttentionIcon.setBounds(rect);
                 mAttentionIcon.draw(canvas);
             }else if(stepsBean.getState()==StepBean.STEP_COMPLETED)
