@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.baoyachi.stepview.HorizontalStepView;
+import com.baoyachi.stepview.HorizontalStepsViewIndicator;
 import com.baoyachi.stepview.bean.StepBean;
 
 import java.util.ArrayList;
@@ -48,8 +49,10 @@ public class TestHorizontalStepViewActivity extends AppCompatActivity
 
                 stepView.setStepViewTexts(stepsBeanList)
                         .setTextSize(16)//set textSize
+                        .isDoneTextBold(false)
                         .setStepsViewIndicatorCompletedLineColor(ContextCompat.getColor(getBaseContext(), android.R.color.white))//设置StepsViewIndicator完成线的颜色
                         .setStepsViewIndicatorUnCompletedLineColor(ContextCompat.getColor(getBaseContext(), R.color.uncompleted_text_color))//设置StepsViewIndicator未完成线的颜色
+                        .setStepsViewIndicatorUnCompletedLineType(HorizontalStepsViewIndicator.UNCOMPLETED_LINE_TYPE_DASH)
                         .setStepViewComplectedTextColor(ContextCompat.getColor(getBaseContext(), android.R.color.white))//设置StepsView text完成线的颜色
                         .setStepViewUnComplectedTextColor(ContextCompat.getColor(getBaseContext(), R.color.uncompleted_text_color))//设置StepsView text未完成线的颜色
                         .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(getBaseContext(), R.drawable.complted))//设置StepsViewIndicator CompleteIcon

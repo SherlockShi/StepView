@@ -26,6 +26,9 @@ import java.util.List;
  */
 public class HorizontalStepsViewIndicator extends View
 {
+    public static final int UNCOMPLETED_LINE_TYPE_SOLID = 1;
+    public static final int UNCOMPLETED_LINE_TYPE_DASH = 2;
+
     //定义默认的高度   definition default height
     private int defaultStepIndicatorNum = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40, getResources().getDisplayMetrics());
 
@@ -56,6 +59,7 @@ public class HorizontalStepsViewIndicator extends View
 
     private OnDrawIndicatorListener mOnDrawListener;
     private int screenWidth;//this screen width
+    private int mUnCompletedLineType = UNCOMPLETED_LINE_TYPE_SOLID;
 
     /**
      * 设置监听
@@ -106,18 +110,24 @@ public class HorizontalStepsViewIndicator extends View
         mCircleCenterPointPositionList = new ArrayList<>();//初始化
 
         mUnCompletedPaint = new Paint();
-        mCompletedPaint = new Paint();
         mUnCompletedPaint.setAntiAlias(true);
         mUnCompletedPaint.setColor(mUnCompletedLineColor);
         mUnCompletedPaint.setStyle(Paint.Style.STROKE);
         mUnCompletedPaint.setStrokeWidth(2);
 
+        mCompletedPaint = new Paint();
         mCompletedPaint.setAntiAlias(true);
         mCompletedPaint.setColor(mCompletedLineColor);
         mCompletedPaint.setStyle(Paint.Style.STROKE);
         mCompletedPaint.setStrokeWidth(2);
 
-        mUnCompletedPaint.setPathEffect(mEffects);
+        if (mUnCompletedLineType == UNCOMPLETED_LINE_TYPE_DASH) {
+            mUnCompletedPaint.setPathEffect(mEffects);
+            mUnCompletedPaint.setStyle(Paint.Style.STROKE);
+        } else {
+            mUnCompletedPaint.setStyle(Paint.Style.FILL);
+        }
+
         mCompletedPaint.setStyle(Paint.Style.FILL);
 
         //已经完成线的宽高 set mCompletedLineHeight
@@ -190,6 +200,11 @@ public class HorizontalStepsViewIndicator extends View
         mCompletedPaint.setColor(mCompletedLineColor);
 
         //-----------------------画线-------draw line-----------------------------------------------
+        if (mUnCompletedLineType == UNCOMPLETED_LINE_TYPE_DASH) {
+            mUnCompletedPaint.setPathEffect(mEffects);
+            mUnCompletedPaint.setStyle(Paint.Style.STROKE);
+        }
+
         for(int i = 0; i < mCircleCenterPointPositionList.size() -1; i++)
         {
             //前一个ComplectedXPosition
@@ -203,9 +218,14 @@ public class HorizontalStepsViewIndicator extends View
                 canvas.drawRect(preComplectedXPosition + mCircleRadius - 10, mLeftY, afterComplectedXPosition - mCircleRadius + 10, mRightY, mCompletedPaint);
             } else
             {
-                mPath.moveTo(preComplectedXPosition + mCircleRadius, mCenterY);
-                mPath.lineTo(afterComplectedXPosition - mCircleRadius, mCenterY);
-                canvas.drawPath(mPath, mUnCompletedPaint);
+                if (mUnCompletedLineType == UNCOMPLETED_LINE_TYPE_DASH) {
+                    mPath.moveTo(preComplectedXPosition + mCircleRadius, mCenterY);
+                    mPath.lineTo(afterComplectedXPosition - mCircleRadius, mCenterY);
+                    canvas.drawPath(mPath, mUnCompletedPaint);
+                } else {
+                    //判断在完成之前的所有点，画完成的线，这里是矩形,很细的矩形，类似线，为了做区分，好看些
+                    canvas.drawRect(preComplectedXPosition + mCircleRadius - 10, mLeftY, afterComplectedXPosition - mCircleRadius + 10, mRightY, mUnCompletedPaint);
+                }
             }
         }
         //-----------------------画线-------draw line-----------------------------------------------
@@ -283,6 +303,16 @@ public class HorizontalStepsViewIndicator extends View
     public void setUnCompletedLineColor(int unCompletedLineColor)
     {
         this.mUnCompletedLineColor = unCompletedLineColor;
+    }
+
+    /**
+     * 设置StepsViewIndicator未完成线的类型
+     *
+     * @param unCompletedLineType：1：实线 2：虚线
+     * @return
+     */
+    public void setUnCompletedLineType(int unCompletedLineType) {
+        this.mUnCompletedLineType = unCompletedLineType;
     }
 
     /**

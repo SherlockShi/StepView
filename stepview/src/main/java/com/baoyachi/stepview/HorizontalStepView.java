@@ -32,6 +32,7 @@ public class HorizontalStepView extends LinearLayout implements HorizontalStepsV
     private int mComplectedTextColor = ContextCompat.getColor(getContext(), android.R.color.white);//定义默认完成文字的颜色;
     private int mTextSize = 14;//default textSize
     private TextView mTextView;
+    private boolean mIsDoneTextBold = true;
 
     public HorizontalStepView(Context context)
     {
@@ -108,6 +109,18 @@ public class HorizontalStepView extends LinearLayout implements HorizontalStepsV
     }
 
     /**
+     * 设置StepsViewIndicator未完成线的类型
+     *
+     * @param unCompletedLineType：1：实线 2：虚线
+     * @return
+     */
+    public HorizontalStepView setStepsViewIndicatorUnCompletedLineType(int unCompletedLineType)
+    {
+        mStepsViewIndicator.setUnCompletedLineType(unCompletedLineType);
+        return this;
+    }
+
+    /**
      * 设置StepsViewIndicator完成线的颜色
      *
      * @param completedLineColor
@@ -167,6 +180,18 @@ public class HorizontalStepView extends LinearLayout implements HorizontalStepsV
         return this;
     }
 
+    /**
+     * set isDoneTextBold
+     *
+     * @param isDoneTextBold
+     * @return
+     */
+    public HorizontalStepView isDoneTextBold(boolean isDoneTextBold)
+    {
+        mIsDoneTextBold = isDoneTextBold;
+        return this;
+    }
+
     @Override
     public void ondrawIndicator()
     {
@@ -190,7 +215,9 @@ public class HorizontalStepView extends LinearLayout implements HorizontalStepsV
 
                     if(i <= mComplectingPosition)
                     {
-                        mTextView.setTypeface(null, Typeface.BOLD);
+                        if (mIsDoneTextBold) {
+                            mTextView.setTypeface(null, Typeface.BOLD);
+                        }
                         mTextView.setTextColor(mComplectedTextColor);
                     } else
                     {
