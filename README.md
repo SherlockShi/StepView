@@ -36,7 +36,7 @@ Step 2. Add the dependency
 	        implementation 'com.github.SherlockShi:StepView:x.y'
 	}		
 
-x.y.z is [![](https://jitpack.io/v/SherlockShi/StepView.svg)](https://jitpack.io/#SherlockShi/StepView)
+x.y is [![](https://jitpack.io/v/SherlockShi/StepView.svg)](https://jitpack.io/#SherlockShi/StepView)
 
 ### use HorizontalStepView
 
