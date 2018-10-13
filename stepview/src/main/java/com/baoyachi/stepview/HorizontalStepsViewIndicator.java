@@ -30,7 +30,7 @@ public class HorizontalStepsViewIndicator extends View
     public static final int UNCOMPLETED_LINE_TYPE_DASH = 2;
 
     //定义默认的高度   definition default height
-    private int defaultStepIndicatorNum = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40, getResources().getDisplayMetrics());
+    private int defaultStepIndicatorNum = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 54, getResources().getDisplayMetrics());
 
     private float mCompletedLineHeight;//完成线的高度     definition completed line height
     private float mCircleRadius;//圆的半径  definition circle radius
