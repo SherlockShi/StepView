@@ -165,6 +165,11 @@ public class HorizontalStepView extends LinearLayout implements HorizontalStepsV
         return this;
     }
 
+    public HorizontalStepView setLinePaddingScale(float linePaddingScale) {
+        mStepsViewIndicator.setLinePaddingScale(linePaddingScale);
+        return this;
+    }
+
     /**
      * set textSize
      *

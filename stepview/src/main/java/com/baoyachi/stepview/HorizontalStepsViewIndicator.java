@@ -30,7 +30,7 @@ public class HorizontalStepsViewIndicator extends View
     public static final int UNCOMPLETED_LINE_TYPE_DASH = 2;
 
     //定义默认的高度   definition default height
-    private int defaultStepIndicatorNum = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 54, getResources().getDisplayMetrics());
+    private int defaultStepIndicatorNum = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40, getResources().getDisplayMetrics());
 
     private float mCompletedLineHeight;//完成线的高度     definition completed line height
     private float mCircleRadius;//圆的半径  definition circle radius
@@ -45,6 +45,7 @@ public class HorizontalStepsViewIndicator extends View
     private List<StepBean> mStepBeanList ;//当前有几部流程    there are currently few step
     private int mStepNum = 0;
     private float mLinePadding;//两条连线之间的间距  definition the spacing between the two circles
+    private float mLinePaddingScale = 0.85f;
 
     private List<Float> mCircleCenterPointPositionList;//定义所有圆的圆心点位置的集合 definition all of circles center point list
     private Paint mUnCompletedPaint;//未完成Paint  definition mUnCompletedPaint
@@ -135,7 +136,7 @@ public class HorizontalStepsViewIndicator extends View
         //圆的半径  set mCircleRadius
         mCircleRadius = 0.28f * defaultStepIndicatorNum;
         //线与线之间的间距    set mLinePadding
-        mLinePadding = 0.85f * defaultStepIndicatorNum;
+        mLinePadding = mLinePaddingScale * defaultStepIndicatorNum;
 
         mCompleteIcon = ContextCompat.getDrawable(getContext(), R.drawable.complted);//已经完成的icon
         mAttentionIcon = ContextCompat.getDrawable(getContext(), R.drawable.attention);//正在进行的icon
@@ -340,6 +341,11 @@ public class HorizontalStepsViewIndicator extends View
     public void setCompleteIcon(Drawable completeIcon)
     {
         this.mCompleteIcon = completeIcon;
+    }
+
+    public void setLinePaddingScale(float linePaddingScale) {
+        this.mLinePaddingScale = linePaddingScale;
+        this.mLinePadding = mLinePaddingScale * defaultStepIndicatorNum;
     }
 
     /**
